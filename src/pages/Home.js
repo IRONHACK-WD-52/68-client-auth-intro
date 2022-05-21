@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
 
 import { AuthContext } from "../contexts/authContext";
+import api from "../apis/api";
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -11,11 +11,7 @@ function Home() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await axios.get("http://localhost:4000/product", {
-          headers: {
-            Authorization: `Bearer ${loggedInUser.token}`,
-          },
-        });
+        const response = await api.get("/product");
 
         console.log(response.data);
 
@@ -33,10 +29,10 @@ function Home() {
     <div>
       <div className="row">
         {products.map((product) => {
-          const { name, price, pictureUrl } = product;
+          const { _id, name, price, pictureUrl } = product;
 
           return (
-            <div className="col-4">
+            <div key={_id} className="col-4">
               <div className="card" style={{ width: "18rem" }}>
                 <img src={pictureUrl} className="card-img-top" alt={name} />
                 <div className="card-body">

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 import FormControl from "../components/FormControl";
 import FormButton from "../components/FormButton";
+
+import api from "../apis/api";
 
 function Signup() {
   const [state, setState] = useState({
@@ -29,7 +30,7 @@ function Signup() {
         throw new Error("As senhas não conferem!");
       }
 
-      const response = await axios.post("http://localhost:4000/signup", state);
+      const response = await api.post("/signup", state);
 
       console.log(response.data);
       // Redireciona para o login
