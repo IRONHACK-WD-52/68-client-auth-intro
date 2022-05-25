@@ -24,11 +24,18 @@ function AuthContextComponent(props) {
 
   useEffect(() => setLoading(false), [state.user]);
 
+  function logoff() {
+    // Esvaziar o state do Context
+    setState({ token: "", user: {} });
+    // Apagar os dados armazenados no localStorage
+    window.localStorage.removeItem("loggedInUser");
+  }
+
   // Provider é o componente que efetivamente disponibiliza o state global para todos seus componentes filhos. O que vai ser efetivamente compartilhado com os componentes filhos é o que for passado como valor para a prop 'value'
   // Ver App.js linha 10
   return (
     // Ver Login.js linhas 18 e 34
-    <AuthContext.Provider value={[state, setState, loading]}>
+    <AuthContext.Provider value={[state, setState, loading, logoff]}>
       {props.children}
     </AuthContext.Provider>
   );

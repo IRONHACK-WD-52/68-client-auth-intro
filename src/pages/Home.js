@@ -11,7 +11,7 @@ function Home() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await api.get("/product");
+        const response = await api.get("/products");
 
         console.log(response.data);
 
