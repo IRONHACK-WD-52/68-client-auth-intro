@@ -1,7 +1,12 @@
 import axios from "axios";
 
+const apiRoots = {
+  development: "http://localhost:4000",
+  production: "https://ih-68-rest-intro.herokuapp.com",
+};
+
 // Configurando o domínio padrão da API para não precisarmos ficar repetindo em todas as rotas
-const api = axios.create({ baseURL: "http://localhost:4000" });
+const api = axios.create({ baseURL: apiRoots[process.env.NODE_ENV] });
 
 // Definir o cabeçalho de autenticação padrão para todas as rotas
 api.interceptors.request.use((config) => {
